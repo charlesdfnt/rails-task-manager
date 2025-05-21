@@ -1,0 +1,52 @@
+
+<%# PAGE INDEX %>
+
+<h1>MY TASKS</h1>
+<% @tasks.each do |task| %>
+  <div>
+    <input type="checkbox" name="<%=task.title %>" <%= task.completed ? "checked" : ""%>>
+    <label for="<%task.title%>"><%= link_to task.title, task_path(task) %></label>
+    <%= link_to "||    delete task", task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
+<% end %>
+<br>
+<br>
+<h2><%= link_to "Add a new task", new_task_path(@task) %></h2>
+
+
+<%# PAGE SHOW %>
+
+<h1><%=@task.title%></h1>
+<h2><%=@task.details%></h2>
+<br>
+<br>
+<p><%= link_to "Back to all my tasks", tasks_path %></p>
+<p><%= link_to "Edit my task", edit_task_path %></p>
+
+
+<%# PAGE NEW %>
+
+<h3>Add a new task:</h3>
+<%= form_with model: @task do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :details %>
+  <%= f.text_field :details %>
+  <%= f.label :completed %>
+  <%= f.check_box :completed %>
+  <%= f.submit %>
+<% end %>
+
+
+<%# PAGE EDIT %>
+
+<h3>Add a new task:</h3>
+<%= form_with model: @task do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :details %>
+  <%= f.text_field :details %>
+  <%= f.label :completed %>
+  <%= f.check_box :completed %>
+  <%= f.submit %>
+<% end %>
